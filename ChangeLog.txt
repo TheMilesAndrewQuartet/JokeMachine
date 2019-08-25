@@ -1,5 +1,3 @@
 25/8/19 - Repository created 
         - 3 resources added (English_Dictionary.txt, KnockKnockJokes.txt and YoMammaJokes.txt)
-        
-To - Do:
-        - Remove whitespace lines from YoMammaJokes.txt
+           
