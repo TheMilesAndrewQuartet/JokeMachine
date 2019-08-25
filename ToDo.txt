@@ -1,0 +1,1 @@
+25/8/19 - Remove whitespace lines from YoMammaJokes.txt
