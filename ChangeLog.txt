@@ -1,0 +1,5 @@
+25/8/19 - Repositry created 
+        - 3 resources added (English_Dictionary.txt, KnockKnockJokes.txt and YoMamaJokes.txt)
+        
+To - Do:
+- Remove whitespace lines from YoMamaJokes.txt
