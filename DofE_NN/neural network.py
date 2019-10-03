@@ -2,7 +2,7 @@
 
 #imports
 import numpy as np
-import data_file_interpret as ext
+import data_interpreter as ext
 
 #sigmoid function (used for feedforward)
 def sigmoid(x):
@@ -46,7 +46,7 @@ def main():
         #backpropagation step 1
         cost = z - labels
 
-        print(cost.sum())
+        #print(cost.sum()) #printing will slow down processing
 
         #backpropagation step 2
         dcost_dpred = cost
@@ -60,24 +60,31 @@ def main():
         for num in z_delta:
             bias -= lr *num
             
-    print("epoch complete for value 20000")
+    print("epoch complete for value 20000\n")
     
-    testing = True
-    while testing == True:
+    new_values = True
+    while new_values == True:
         #inputs for testing
         v1 = int(input("please input a value for weather: "))
         v2 = int(input("please input a value for sleep: "))
         v3 = int(input("please input a value for physical: "))
         v4 = int(input("please input a value for food: "))
+        print("\n")
         #testing values
         single_point = np.array([v1,v2,v3,v4])
         result = sigmoid(np.dot(single_point, weights) + bias)
-        print("Overall moral at: "+str(result))
+        print("likelyhood of positive moral is estimated to be "+str(result))
+        moral = round((10*float(result))) #rounds moral to nearest whole number
+        print("overall moral at: "+str(moral)+"\n")
         
+        #exit clause
+        user_input = input("please enter q to quit: ")
+        if user_input.lower() == "q":
+            print("\nquitting...")
+            new_values = False
+            quit()
+        else:
+            pass
         
-
-    
-main()
-    
-           
-
+if __name__ == "__main__":
+    main()
