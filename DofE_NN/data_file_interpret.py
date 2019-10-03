@@ -7,7 +7,9 @@ class file_management():
         self.raw_data = self.import_file()
         self.array = self.interpret_data()
         self.fur_array = self.further_interpret()
-
+        self.input_layer = []
+        self.output_layer = []
+        self.create_layers()
         
     #handles the import of the file to raw data
     def import_file(self):
@@ -38,19 +40,32 @@ class file_management():
     #simplifies integer data down to booleans
     def further_interpret(self):
         fur_array = self.array
-        correspond = {"0":False,"1":False,"2":False,"3":False,"4":False,"5":True,"6":True,"7":True,"8":True,"9":True,"10":True} #dictionary to correspond with 
+        correspond = {"0":0,"1":0,"2":0,"3":0,"4":0,"5":1,"6":1,"7":1,"8":1,"9":1,"10":1} #dictionary to correspond with
+        
+        #removes day and time from array
+        for a in fur_array:
+            for b in range(0,2):
+                fur_array[fur_array.index(a)].pop(0) #day is pos 0, once day removed time is pos 0
+        
         #per 1d
         for x in fur_array:
             depth = fur_array.index(x)
             #2d
             for y in x:
-                #if day or time
-                if x.index(y) == 0 or x.index(y) == 1:
-                    pass
-                else:
-                    fur_array[depth][x.index(y)] = correspond[y]
+                fur_array[depth][x.index(y)] = correspond[y]
 
         return(fur_array)
+
+    #creates both input and output layers
+    def create_layers(self):
+        input_l = []
+        output_l = []
+        #iterate through 2d array
+        for x in self.fur_array:
+            output_l.append(x.pop(4))
+            input_l.append(x)
+        self.input_layer = input_l
+        self.output_layer = output_l
         
     #returns the array (has to recreate as fur_array overwrites
     def get_array(self):
@@ -60,17 +75,19 @@ class file_management():
     def get_data(self):
         return(self.raw_data)
 
-    #returns fur_array
-    def get_fur(self):
-        return(self.fur_array)
-
+    def get_input_layer(self):
+        return(self.input_layer)
+    
+    def get_output_layer(self):
+        return(self.output_layer)
 
 
 if __name__ == "__main__":
     file = file_management("data.csv")
     print(file.get_data())
     print(file.get_array())
-    print(file.get_fur())
+    print(file.get_input_layer())
+    print(file.get_output_layer())
 
         
 
